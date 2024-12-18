@@ -23,5 +23,9 @@ namespace Sae_Chasseneige
         {
             InitializeComponent();
         }
+        private void Continuer_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
     }
 }

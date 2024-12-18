@@ -33,7 +33,7 @@ namespace Sae_Chasseneige
 
             if (MainWindow.nbNeiges < 50 * MainWindow.vitesseChasseNeige)
             {
-                MessageBox.Show("pas asser de neige");
+                MessageBox.Show("pas assez de neige");
             }
             else
             {

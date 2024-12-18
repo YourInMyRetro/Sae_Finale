@@ -19,12 +19,8 @@ namespace Sae_Chasseneige
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static bool gauche, droite, haut, bas, collision, AfficheVictoire, AfficheDefaite;
-        private static BitmapImage  chasseNeigeHaut;
-        private static BitmapImage chasseNeigeBas;
-        private static BitmapImage chasseNeigeDroite;
-        private static BitmapImage chasseNeigeGauche;
-        private static DispatcherTimer minuterie;
+
+        public static bool gauche, droite, haut, bas, collision, AfficheVictoire, AfficheDefaite;
         public static double posX;
         public static double posY;
         public static double augmentationX, augmentationY;
@@ -74,10 +70,10 @@ namespace Sae_Chasseneige
 
         private void InitBitMAP()
         {
-            chasseNeigeHaut = Constances.CHASSENEIGEHAUT;
-            chasseNeigeBas = Constances.CHASSENEIGEBAS;
-            chasseNeigeGauche = Constances.CHASSENEIGEDROITE;
-            chasseNeigeDroite = Constances.CHASSENEIGEGAUCHE;
+            Constances.chasseNeigeHaut = Constances.CHASSENEIGEHAUT;
+            Constances.chasseNeigeBas = Constances.CHASSENEIGEBAS;
+            Constances.chasseNeigeGauche = Constances.CHASSENEIGEDROITE;
+            Constances.chasseNeigeDroite = Constances.CHASSENEIGEGAUCHE;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -93,10 +89,10 @@ namespace Sae_Chasseneige
         {
             if (FenêtreDeDemarrage.modeChrono == false)
             {
-                minuterie = new DispatcherTimer();
-                minuterie.Interval = TimeSpan.FromSeconds(5);
-                minuterie.Tick += NeigeSimulation;
-                minuterie.Start();
+               Constances.minuterie = new DispatcherTimer();
+                Constances.minuterie.Interval = TimeSpan.FromSeconds(5);
+                Constances.minuterie.Tick += NeigeSimulation;
+                Constances.minuterie.Start();
             }
         }
 
@@ -147,18 +143,18 @@ namespace Sae_Chasseneige
 
         private void InitTimer()
         {
-            minuterie = new DispatcherTimer();
-            minuterie.Interval = TimeSpan.FromMilliseconds(16);
-            minuterie.Tick += Deplacement;
-            minuterie.Tick += StockNeige;
-            minuterie.Start();
+            Constances.minuterie = new DispatcherTimer();
+            Constances.minuterie.Interval = TimeSpan.FromMilliseconds(16);
+            Constances.minuterie.Tick += Deplacement;
+            Constances.minuterie.Tick += StockNeige;
+            Constances.minuterie.Start();
             if (FenêtreDeDemarrage.modeChrono == true)
             {
-                minuterie = new DispatcherTimer();
-                minuterie.Interval = TimeSpan.FromSeconds(1);
-                minuterie.Tick += Chronomètre;
-                minuterie.Tick += Victoire;
-                minuterie.Start();
+                Constances.minuterie = new DispatcherTimer();
+                Constances.minuterie.Interval = TimeSpan.FromSeconds(1);
+                Constances.minuterie.Tick += Chronomètre;
+                Constances.minuterie.Tick += Victoire;
+                Constances.minuterie.Start();
 
             }
         }
@@ -170,7 +166,7 @@ namespace Sae_Chasseneige
                 Console.WriteLine("chronos inferieur a 0");
                 Defaite fenêtreDefaite = new Defaite();
                 fenêtreDefaite.ShowDialog();
-                minuterie.Stop();
+                Constances.minuterie.Stop();
             }
             else if (nbNeiges >= Constances.NOMBREDENEIGE)
             {
@@ -186,7 +182,7 @@ namespace Sae_Chasseneige
                     Console.WriteLine("L'utilisateur a cliqué sur Continuer !");
                 }
 
-                minuterie.Stop();
+                Constances.minuterie.Stop();
             }
         }
 
@@ -279,22 +275,22 @@ namespace Sae_Chasseneige
             if (haut)
             {
                 nouvellePosY -= vitesseChasseNeige;
-                Constances.ChasseNeige.Source = chasseNeigeHaut;
+                Constances.ChasseNeige.Source = Constances.chasseNeigeHaut;
             }
             if (bas)
             {
                 nouvellePosY += vitesseChasseNeige;
-                Constances.ChasseNeige.Source = chasseNeigeBas;
+                Constances.ChasseNeige.Source = Constances.chasseNeigeBas;
             }
             if (gauche)
             {
                 nouvellePosX -= vitesseChasseNeige;
-                Constances.ChasseNeige.Source = chasseNeigeGauche;
+                Constances.ChasseNeige.Source = Constances.chasseNeigeGauche;
             }
             if (droite)
             {
                 nouvellePosX += vitesseChasseNeige;
-                Constances.ChasseNeige.Source = chasseNeigeDroite;
+                Constances.ChasseNeige.Source = Constances.chasseNeigeDroite;
             }
 
 

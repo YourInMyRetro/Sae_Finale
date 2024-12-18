@@ -19,7 +19,7 @@ namespace Sae_Chasseneige
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private MediaPlayer sonDeplacement; // Instance pour gérer le son de déplacement
         public static bool gauche, droite, haut, bas, collision, AfficheVictoire, AfficheDefaite;
         public static double posX;
         public static double posY;
@@ -72,15 +72,19 @@ namespace Sae_Chasseneige
             musique = new MediaPlayer();
             musique.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/sons/FortniteFinale.mp3"));
             musique.MediaEnded += RelanceMusique;
-            musique.Volume = 1.0;
+            musique.Volume =0.5;
             musique.Play();
         }
 
         private void RelanceMusique(object? sender, EventArgs e)
         {
-            musique.Position = TimeSpan.Zero;
-            musique.Play();
+            if (sender is MediaPlayer player)
+            {
+                player.Position = TimeSpan.Zero; // Recommence le son depuis le début
+                player.Play(); // Relance la lecture
+            }
         }
+
 
 
 
@@ -266,7 +270,24 @@ namespace Sae_Chasseneige
                 default:    // ignore les autres touches
                     break;
             }
-        }
+            if (droite || gauche || haut || bas)
+            {
+                // Jouer le son de déplacement
+                if (sonDeplacement == null) // Crée l'instance si elle n'existe pas
+                {
+                    sonDeplacement = new MediaPlayer();
+                    sonDeplacement.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/sons/v8.mp3"));
+                    sonDeplacement.Volume = 0.2; // ajustement du volume 
+                    sonDeplacement.MediaEnded += RelanceMusique;// appel à la méthode relance pour pas que le son du v8 s'arrête après plusieurs secondes 
+                }
+
+                // Si le son n'est pas en train de jouer, lance-le
+                if (sonDeplacement.Position == TimeSpan.Zero || sonDeplacement.HasAudio == false)
+                {
+                    sonDeplacement.Play();
+                }
+            }
+        }   
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
@@ -286,6 +307,16 @@ namespace Sae_Chasseneige
                     break;
                 default:    // ignore les autres touches
                     break;
+
+            }
+            if (!droite && !gauche && !haut && !bas)
+            {
+                // Arrêter le son de déplacement
+                if (sonDeplacement != null)
+                {
+                    sonDeplacement.Stop();
+                    sonDeplacement.Position = TimeSpan.Zero; // Réinitialise le son
+                }
             }
         }
 
@@ -325,6 +356,8 @@ namespace Sae_Chasseneige
 
                 Canvas.SetLeft(Constances.ChasseNeige, posX);
                 Canvas.SetTop(Constances.ChasseNeige, posY);
+
+                
             }
             else
             {

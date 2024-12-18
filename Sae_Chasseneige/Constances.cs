@@ -26,11 +26,12 @@ namespace Sae_Chasseneige
         public static readonly int LONGUEURCHASSENEIGE = 7;
         public static readonly Rectangle[,] TABLEAU_NEIGE = new Rectangle[50, 50];
         public static readonly int NOMBREDENEIGE = 11;
- 
+
 
         // -----------------------------------------------------------------------------------------------------
         // IMAGE 
-        BitmapImage chasseNeigeSource = new BitmapImage(new Uri("img/CamionHAUT.png", UriKind.Relative));
+        public static readonly Image ChasseNeige = new Image();
+        public static readonly BitmapImage chasseNeigeSource = new BitmapImage(new Uri("img/CamionHAUT.png", UriKind.Relative));
         public static readonly BitmapImage CHASSENEIGEHAUT = new BitmapImage(new Uri("pack://application:,,,/img/camionHAUT.png"));
         public static readonly BitmapImage CHASSENEIGEBAS = new BitmapImage(new Uri("pack://application:,,,/img/camionBAS.png"));
         public static readonly BitmapImage CHASSENEIGEDROITE = new BitmapImage(new Uri("pack://application:,,,/img/camionGAUCHE.png"));

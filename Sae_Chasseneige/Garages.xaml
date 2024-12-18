@@ -1,0 +1,46 @@
+﻿<Window x:Class="Sae_Chasseneige.Garages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sae_Chasseneige"
+               mc:Ignorable="d"
+            Title="Garages"
+    Width="800"
+    Height="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None">
+    <Window.Background>
+        <ImageBrush ImageSource="/img/garage.png" />
+    </Window.Background>
+    <Grid Margin="0,0,0,260">
+
+        <Button
+      x:Name="Jouer"
+      Canvas.Left="300"
+      Canvas.Top="150"
+      Width="200"
+      Height="50"
+      Background="Blue"
+      Click="Jouer_Click"
+      Content="JOUER"
+      FontSize="20"
+      Foreground="White" RenderTransformOrigin="0.503,1.875" Margin="0,227,0,-87" HorizontalAlignment="Center" />
+
+
+        <Button
+      x:Name="Améliorer"
+      Canvas.Left="300"
+      Canvas.Top="295"
+      Width="200"
+      Height="50"
+      Background="Brown"
+      Click="Améliorer_Click"
+      Content="AMELIORER VITESSE"
+      FontSize="20"
+      Foreground="White" HorizontalAlignment="Center" RenderTransformOrigin="0.473,1.504" Margin="0,327,0,-187" />
+        <Label x:Name="neigeDispo" Content="Label" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top" Height="40" Width="64" Foreground="Red"/>
+    </Grid>
+</Window>

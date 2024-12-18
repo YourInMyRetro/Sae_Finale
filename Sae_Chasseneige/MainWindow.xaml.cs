@@ -106,7 +106,7 @@ namespace Sae_Chasseneige
             coefficientTaillefenêtreX = this.ActualWidth / 800.0;
             coefficientTaillefenêtreY = this.ActualHeight / 800.0;
 
-            foreach (Rectangle element in TABLEAU_NEIGE)
+            foreach (Rectangle element in Constances.TABLEAU_NEIGE)
             {
                 if (element != null)
                 {
@@ -135,7 +135,7 @@ namespace Sae_Chasseneige
 
                         Canvas.SetLeft(rect, x * Constances.TAILLETUILE * coefficientTaillefenêtreX);
                         Canvas.SetTop(rect, y * Constances.TAILLETUILE * coefficientTaillefenêtreY);
-                        TABLEAU_NEIGE[x, y] = rect;
+                        Constances.TABLEAU_NEIGE[x, y] = rect;
                         Canvas.Children.Add(rect);
 
                     }
@@ -172,7 +172,7 @@ namespace Sae_Chasseneige
                 fenêtreDefaite.ShowDialog();
                 minuterie.Stop();
             }
-            else if (nbNeiges >= NOMBREDENEIGE)
+            else if (nbNeiges >= Constances.NOMBREDENEIGE)
             {
                 AfficheVictoire = true;
                 Console.WriteLine("Victoire atteinte !");
@@ -272,29 +272,29 @@ namespace Sae_Chasseneige
         private void Deplacement(object? sender, EventArgs e)
         {
             // Récupération de la position actuelle
-            double nouvellePosX = Canvas.GetLeft(ChasseNeige);
-            double nouvellePosY = Canvas.GetTop(ChasseNeige);
+            double nouvellePosX = Canvas.GetLeft(Constances.ChasseNeige);
+            double nouvellePosY = Canvas.GetTop(Constances.ChasseNeige);
 
             // Calcul des nouvelles positions en fonction des directions
             if (haut)
             {
                 nouvellePosY -= vitesseChasseNeige;
-                ChasseNeige.Source = chasseNeigeHaut;
+                Constances.ChasseNeige.Source = chasseNeigeHaut;
             }
             if (bas)
             {
                 nouvellePosY += vitesseChasseNeige;
-                ChasseNeige.Source = chasseNeigeBas;
+                Constances.ChasseNeige.Source = chasseNeigeBas;
             }
             if (gauche)
             {
                 nouvellePosX -= vitesseChasseNeige;
-                ChasseNeige.Source = chasseNeigeGauche;
+                Constances.ChasseNeige.Source = chasseNeigeGauche;
             }
             if (droite)
             {
                 nouvellePosX += vitesseChasseNeige;
-                ChasseNeige.Source = chasseNeigeDroite;
+                Constances.ChasseNeige.Source = chasseNeigeDroite;
             }
 
 
@@ -303,8 +303,8 @@ namespace Sae_Chasseneige
                 posX = nouvellePosX;  // mise à jour de la position car pas de collision
                 posY = nouvellePosY;
 
-                Canvas.SetLeft(ChasseNeige, posX);
-                Canvas.SetTop(ChasseNeige, posY);
+                Canvas.SetLeft(Constances.ChasseNeige, posX);
+                Canvas.SetTop(Constances.ChasseNeige, posY);
             }
             else
             {
@@ -334,16 +334,16 @@ namespace Sae_Chasseneige
             // Taille ajustée pour correspondre à la hitbox
             double largeurCorrection = 17 / Constances.TAILLETUILE; // Conversion de la correction en unités de tuiles
             double longueurCorrection = 35 / Constances.TAILLETUILE;
-            ChasseNeige.Width = Constances.TAILLETUILE * (Constances.LARGEURCHASSENEIGE - largeurCorrection) * coefficientTaillefenêtreX;
-            ChasseNeige.Height = Constances.TAILLETUILE * (Constances.LONGUEURCHASSENEIGE - longueurCorrection) * coefficientTaillefenêtreY;
+            Constances.ChasseNeige.Width = Constances.TAILLETUILE * (Constances.LARGEURCHASSENEIGE - largeurCorrection) * coefficientTaillefenêtreX;
+            Constances.ChasseNeige.Height = Constances.TAILLETUILE * (Constances.LONGUEURCHASSENEIGE - longueurCorrection) * coefficientTaillefenêtreY;
 
             // Placement initial
-            Canvas.SetLeft(ChasseNeige, posX);
-            Canvas.SetTop(ChasseNeige, posY);
+            Canvas.SetLeft(Constances.ChasseNeige, posX);
+            Canvas.SetTop(Constances.ChasseNeige, posY);
 
             // Assignation de la texture et ajout au canvas
-            ChasseNeige.Source = chasseNeigeSource;
-            Canvas.Children.Add(ChasseNeige);
+            Constances.ChasseNeige.Source = Constances.chasseNeigeSource;
+            Canvas.Children.Add(Constances.ChasseNeige);
         }
 
         private void StockNeige(object? sender, EventArgs e)
@@ -389,7 +389,7 @@ namespace Sae_Chasseneige
                     }
                     else if (Constances.MAP[y, x] == 1) // Si neige
                     {
-                        Rectangle rect = TABLEAU_NEIGE[x, y];
+                        Rectangle rect = Constances.TABLEAU_NEIGE[x, y];
 
                         if (rect != null)
                         {
@@ -397,7 +397,7 @@ namespace Sae_Chasseneige
                             nbNeiges++;
                         }
 
-                        TABLEAU_NEIGE[x, y] = null;
+                        Constances.TABLEAU_NEIGE[x, y] = null;
                     }
                     else if (Constances.MAP[y, x] == 4) // Garage
                     {
@@ -406,7 +406,7 @@ namespace Sae_Chasseneige
                             gauche = droite = haut = bas = false; // Réinitialisation des directions
 
                             posX += Constances.TAILLETUILE * coefficientTaillefenêtreX;
-                            Canvas.SetLeft(ChasseNeige, posX); // Mise à jour de la position
+                            Canvas.SetLeft(Constances.ChasseNeige, posX); // Mise à jour de la position
 
                             Garages fenetreGarage = new Garages();
 
@@ -426,5 +426,4 @@ namespace Sae_Chasseneige
     }
 
 
-}
 }

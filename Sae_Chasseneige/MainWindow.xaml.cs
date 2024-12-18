@@ -247,10 +247,6 @@ namespace Sae_Chasseneige
             Canvas.Children.Add(chronos);
         }
 
-
-
-
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -373,7 +369,6 @@ namespace Sae_Chasseneige
         private void StockNeige(object? sender, EventArgs e)
         {
             Constances.neiges.Content = "Neiges " + nbNeiges;
-
 
         }
      

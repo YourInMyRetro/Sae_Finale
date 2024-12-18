@@ -408,6 +408,10 @@ namespace Sae_Chasseneige
                         {
                             Canvas.Children.Remove(rect);
                             nbNeiges++;
+                            MediaPlayer bruitNeige = new MediaPlayer();
+                            bruitNeige.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/sons/neige.mp3"));
+                            bruitNeige.Volume = 0.09;
+                            bruitNeige.Play();
                         }
 
                         Constances.TABLEAU_NEIGE[x, y] = null;

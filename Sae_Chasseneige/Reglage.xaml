@@ -8,44 +8,64 @@
     ResizeMode="NoResize">
     <Grid>
         <Button
-        Width="166"
-        Height="53"
-        Margin="38,28,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Z" />
+            Width="166"
+            Height="53"
+            Margin="38,28,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Z" />
         <Button
-        Width="166"
-        Height="53"
-        Margin="38,107,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Q" />
+            Width="166"
+            Height="53"
+            Margin="38,107,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Q" />
         <Button
-        Width="166"
-        Height="53"
-        Margin="38,0,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Center"
-        Content="S" />
+            Width="166"
+            Height="53"
+            Margin="38,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="S" />
         <Button
-        Width="166"
-        Height="53"
-        Margin="38,269,0,0"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="D" />
+            Width="166"
+            Height="53"
+            Margin="38,269,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="D" />
         <TextBlock
             x:Name="InfoText"
             Margin="414,21,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontSize="16"
-            TextWrapping="Wrap" ><Run Language="fr-fr" Text="Touche disponible"/><LineBreak/><Run Language="fr-fr"/></TextBlock>
-        <TextBlock  HorizontalAlignment="Left" Margin="233,55,0,0" TextWrapping="Wrap" Text="Haut" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="232,126,0,0" TextWrapping="Wrap" Text="gauche" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="235,0,0,0" TextWrapping="Wrap" Text="Bas" VerticalAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Left" Margin="234,288,0,0" TextWrapping="Wrap" Text="Droite" VerticalAlignment="Top"/>
+            TextWrapping="Wrap"><Run Language="fr-fr" Text="Touche disponible" /><LineBreak /><Run Language="fr-fr" /></TextBlock>
+        <TextBlock
+            Margin="233,55,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Haut"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="232,126,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="gauche"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="235,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="Bas"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="234,288,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="Droite"
+            TextWrapping="Wrap" />
 
     </Grid>
 </Window>

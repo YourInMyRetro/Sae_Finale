@@ -30,27 +30,26 @@ namespace Sae_Chasseneige
         private void Améliorer_Click(object sender, RoutedEventArgs e)
         {
 
-
             if (MainWindow.nbNeiges < 50 * MainWindow.vitesseChasseNeige)
             {
-                MessageBox.Show("pas assez de neige");
+                MessageBox.Show("pas assez de neige");                          //regarde si il ya asser deneige opur amelioration
             }
             else
             {
                 MainWindow.vitesseChasseNeige++;
-                MainWindow.nbNeiges -= 50 * MainWindow.vitesseChasseNeige;
+                MainWindow.nbNeiges -= 50 * MainWindow.vitesseChasseNeige;      // soustrait la neige pour ameliorer la vitesse
             }
         }
 
         private void Afficheneige()
         {
-            neigeDispo.Content = "neige " + MainWindow.nbNeiges;
+            neigeDispo.Content = "neige " + MainWindow.nbNeiges;                    // affiche la neige sur la page
         }
 
         private void Jouer_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            // Ferme la fenêtre pour retourner au jeu
+            this.DialogResult = true;           // quand cliquer sur jouer retour au jeu
+
             this.Close();
 
         }

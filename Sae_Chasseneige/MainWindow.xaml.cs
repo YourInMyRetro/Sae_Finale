@@ -20,7 +20,7 @@ namespace Sae_Chasseneige
     public partial class MainWindow : Window
     {
         private MediaPlayer sonDeplacement; // gérer le son du déplacement
-        public static bool gauche, droite, haut, bas; // gérer les sens
+        public static bool gauche, droite, haut, bas, echappe; // gérer les sens
         public static bool collision, AfficheVictoire, AfficheDefaite; // bolléen pour vérifier les collision et 2 autres bolléen qui s'active en condition de victoire ou de defaite
         public static double posX; 
         public static double posY;
@@ -31,24 +31,23 @@ namespace Sae_Chasseneige
         public static int tempsChrono; // Temps de base du chrono qui s'active uniquement en modeChrono(mode Facile ou Difficile)
         public static Label chronos = new Label(); // Chronomètre actuel qui est affiché
         public static MediaPlayer musique;// gérer la musique de fond
-  
+        public static FenêtreDeDemarrage fenêtreDémarrage = new FenêtreDeDemarrage();
+
 
         public MainWindow()
         {
             InitializeComponent();
-            FenêtreDeDemarrage fenêtreDémarrage = new FenêtreDeDemarrage(); 
+           
             fenêtreDémarrage.ShowDialog(); // affiche la fenêtre du début 
+           
             //    if(Constances.MAP[y, x] == 4)
             if (fenêtreDémarrage.DialogResult == false)
             {
                 Application.Current.Shutdown();// ferme l'appli
                 this.Close(); // fermer la fenêtre
             }
-            if (FenêtreDeDemarrage.lancementReglage == true)
-            {
-                Reglage régle = new Reglage();
-                régle.ShowDialog();
-            }
+           
+
             if (FenêtreDeDemarrage.modeChrono == true)
             {
                 EmplacementChrono(); // si mode facile ou difficile alors, afficher le chrono
@@ -250,6 +249,9 @@ namespace Sae_Chasseneige
                 case Key.Down:
                     bas = true;
                     break;
+                case Key.Escape:
+                    echappe = true;
+                    break;
                 default:    // ignore les autres touches
                     break;
             }
@@ -269,7 +271,10 @@ namespace Sae_Chasseneige
                 {
                     sonDeplacement.Play();
                 }
+              /*  if (echappe)
+                    fenêtreDémarrage.ShowDialog();*/
             }
+           
         }   
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
@@ -288,6 +293,9 @@ namespace Sae_Chasseneige
                     break;
                 case Key.Down:
                     bas = false;
+                    break;
+                case Key.Escape:
+                    droite = false;
                     break;
                 default:    // ignore les autres touches
                     break;

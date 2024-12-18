@@ -1,16 +1,51 @@
-﻿<Window x:Name="reglage" x:Class="Sae_Chasseneige.Reglage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Sae_Chasseneige"
-                mc:Ignorable="d"
-        Title="Reglage" Height="450" Width="800" ResizeMode="NoResize">
+﻿<Window
+    x:Class="Sae_Chasseneige.Reglage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Réglages"
+    Width="800"
+    Height="450"
+    ResizeMode="NoResize">
     <Grid>
-        <Button Content="Z" HorizontalAlignment="Left" Margin="38,28,0,0" VerticalAlignment="Top" Height="53" Width="166"/>
-        <Button Content="Q" HorizontalAlignment="Left" Margin="38,107,0,0" VerticalAlignment="Top" Height="53" Width="166"/>
-        <Button Content="S" HorizontalAlignment="Left" Margin="38,0,0,0" VerticalAlignment="Center" Height="53" Width="166"/>
-        <Button Content="D" HorizontalAlignment="Left" Margin="38,269,0,0" VerticalAlignment="Top" Height="53" Width="166"/>
+        <Button
+        Width="166"
+        Height="53"
+        Margin="38,28,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Z" />
+        <Button
+        Width="166"
+        Height="53"
+        Margin="38,107,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Q" />
+        <Button
+        Width="166"
+        Height="53"
+        Margin="38,0,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        Content="S" />
+        <Button
+        Width="166"
+        Height="53"
+        Margin="38,269,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="D" />
+        <TextBlock
+            x:Name="InfoText"
+            Margin="414,21,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="16"
+            TextWrapping="Wrap" ><Run Language="fr-fr" Text="Touche disponible"/><LineBreak/><Run Language="fr-fr"/></TextBlock>
+        <TextBlock  HorizontalAlignment="Left" Margin="233,55,0,0" TextWrapping="Wrap" Text="Haut" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="232,126,0,0" TextWrapping="Wrap" Text="gauche" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="235,0,0,0" TextWrapping="Wrap" Text="Bas" VerticalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="234,288,0,0" TextWrapping="Wrap" Text="Droite" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
-

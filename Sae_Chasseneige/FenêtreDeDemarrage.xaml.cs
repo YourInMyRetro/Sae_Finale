@@ -47,7 +47,8 @@ namespace Sae_Chasseneige
 
         private void Reglages_Click(object sender, RoutedEventArgs e)
         {
-            lancementReglage = true;
+            Reglage régle = new Reglage();
+            régle.ShowDialog();
 
         }
 

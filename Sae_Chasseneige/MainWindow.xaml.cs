@@ -31,14 +31,14 @@ namespace Sae_Chasseneige
         public static int tempsChrono; // Temps de base du chrono qui s'active uniquement en modeChrono(mode Facile ou Difficile)
         public static Label chronos = new Label(); // Chronomètre actuel qui est affiché
         public static MediaPlayer musique;// gérer la musique de fond
-        public static FenêtreDeDemarrage fenêtreDémarrage = new FenêtreDeDemarrage();
+       
 
 
         public MainWindow()
         {
             InitializeComponent();
-           
-            fenêtreDémarrage.ShowDialog(); // affiche la fenêtre du début 
+            FenêtreDeDemarrage fenêtreDémarrage = new FenêtreDeDemarrage();
+        fenêtreDémarrage.ShowDialog(); // affiche la fenêtre du début 
            
             //    if(Constances.MAP[y, x] == 4)
             if (fenêtreDémarrage.DialogResult == false)
@@ -271,8 +271,12 @@ namespace Sae_Chasseneige
                 {
                     sonDeplacement.Play();
                 }
-              /*  if (echappe)
-                    fenêtreDémarrage.ShowDialog();*/
+               /* if (echappe)
+                {
+                    FenêtreDeDemarrage fenêtreDémarrage = new FenêtreDeDemarrage();
+                    fenêtreDémarrage.ShowDialog();
+                    
+                }*/
             }
            
         }   

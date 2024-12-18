@@ -107,7 +107,7 @@ namespace Sae_Chasseneige
             if (FenêtreDeDemarrage.modeChrono == false)
             {
                Constances.minuterie = new DispatcherTimer();
-                Constances.minuterie.Interval = TimeSpan.FromSeconds(5);
+                Constances.minuterie.Interval = TimeSpan.FromMinutes(1);
                 Constances.minuterie.Tick += NeigeSimulation;
                 Constances.minuterie.Start();
             }
@@ -394,7 +394,7 @@ namespace Sae_Chasseneige
 
         private void StockNeige(object? sender, EventArgs e)
         {
-            Constances.neiges.Content = "Neiges " + nbNeiges;
+            Constances.neiges.Content = "Neiges " + nbNeiges +"/"+ Constances.NOMBREDENEIGE;
 
         }
      

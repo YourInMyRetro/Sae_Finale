@@ -26,7 +26,6 @@ namespace Sae_Chasseneige
         public static double augmentationX, augmentationY;
         public static double coefficientTaillefenêtreX, coefficientTaillefenêtreY;
         public static int nbNeiges;
-        public static Label neiges = new Label();
         public static int vitesseChasseNeige;
         public static int tempsChrono;
         public static Label chronos = new Label();
@@ -155,6 +154,18 @@ namespace Sae_Chasseneige
 
                 }
             }
+
+        }
+
+        public void EmplacementScoreNeige()
+        {
+            Constances.neiges.Content = "nbNeige";
+            Constances.neiges.FontSize = 25;
+            Constances.neiges.Foreground = Brushes.Red;
+
+            // Canvas.SetLeft(neiges, 10*coefficientTaillefenêtreX); // Position horizontale
+            //Canvas.SetTop(neiges, 50*coefficientTaillefenêtreY);
+            Canvas.Children.Add(Constances.neiges);
 
         }
 
@@ -361,21 +372,11 @@ namespace Sae_Chasseneige
 
         private void StockNeige(object? sender, EventArgs e)
         {
-            neiges.Content = "Neiges " + nbNeiges;
+            Constances.neiges.Content = "Neiges " + nbNeiges;
 
 
         }
-        public void EmplacementScoreNeige()
-        {
-            neiges.Content = "nbNeige";
-            neiges.FontSize = 25;
-            neiges.Foreground = Brushes.Red;
-
-            // Canvas.SetLeft(neiges, 10*coefficientTaillefenêtreX); // Position horizontale
-            //Canvas.SetTop(neiges, 50*coefficientTaillefenêtreY);
-            Canvas.Children.Add(neiges);
-
-        }
+     
 
 
         private bool Collision(double posX, double posY)

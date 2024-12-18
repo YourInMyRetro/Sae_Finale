@@ -33,6 +33,7 @@ namespace Sae_Chasseneige
         public static BitmapImage chasseNeigeBas;
         public static BitmapImage chasseNeigeDroite;
         public static BitmapImage chasseNeigeGauche;
+        public static Label neiges = new Label();
 
 
         // -----------------------------------------------------------------------------------------------------
@@ -100,6 +101,7 @@ namespace Sae_Chasseneige
             { 0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0} };
 
+     
 
 
 

@@ -22,10 +22,15 @@ namespace Sae_Chasseneige
         public FenêtreDeDemarrage()
         {
             InitializeComponent();
-            this.WindowState = WindowState.Maximized;
+           // this.WindowState = WindowState.Maximized;
         }
         public static bool lancementReglage, modeChrono;
         public static string nvDifficulté = "facile";
+
+       private void PLacementBouton()
+       {
+        
+        }
 
         private void Jouer_Click(object sender, RoutedEventArgs e)
         {

@@ -82,8 +82,6 @@ namespace Sae_Chasseneige
             musique.Play();
         }
 
-
-
         private void InitBitMAP()
         {
             Constances.chasseNeigeHaut = Constances.CHASSENEIGEHAUT;
@@ -112,7 +110,6 @@ namespace Sae_Chasseneige
             }
         }
 
-
         private void NeigeSimulation(object? sender, EventArgs e)
         {
             coefficientTaillefenêtreX = this.ActualWidth / 800.0;
@@ -125,7 +122,6 @@ namespace Sae_Chasseneige
                     Canvas.Children.Remove(element);
                 }
             }
-
 
             // Boucle d’abord sur y, puis sur x, pour correspondre à Constances.MAP[y, x]
             for (int y = 0; y < Constances.MAP.GetLength(0); y++)
@@ -149,12 +145,9 @@ namespace Sae_Chasseneige
                         Canvas.SetTop(rect, y * Constances.TAILLETUILE * coefficientTaillefenêtreY);
                         Constances.TABLEAU_NEIGE[x, y] = rect;
                         Canvas.Children.Add(rect);
-
                     }
-
                 }
             }
-
         }
 
         public void EmplacementScoreNeige()

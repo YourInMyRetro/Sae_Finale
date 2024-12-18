@@ -30,6 +30,7 @@ namespace Sae_Chasseneige
         public static int vitesseChasseNeige;
         public static int tempsChrono;
         public static Label chronos = new Label();
+        public static MediaPlayer musique;
   
 
         public MainWindow()
@@ -56,6 +57,7 @@ namespace Sae_Chasseneige
             EmplacementScoreNeige();
             InitBitMAP();
             InitTimer();
+            InitMusique();
         }
 
         private void Vitesse()
@@ -64,6 +66,21 @@ namespace Sae_Chasseneige
                 vitesseChasseNeige = 3;
             else if (FenêtreDeDemarrage.modeChrono)
                 vitesseChasseNeige = 6;
+        }
+
+        private void InitMusique()
+        {
+            musique = new MediaPlayer();
+            musique.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/sons/FortniteFinale.mp3"));
+            musique.MediaEnded += RelanceMusique;
+            musique.Volume = 1.0;
+            musique.Play();
+        }
+
+        private void RelanceMusique(object? sender, EventArgs e)
+        {
+            musique.Position = TimeSpan.Zero;
+            musique.Play();
         }
 
 

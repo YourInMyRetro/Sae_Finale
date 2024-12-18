@@ -187,17 +187,16 @@ namespace Sae_Chasseneige
         {
             if (tempsChrono < 0)                                        // Si le temps du chrono est inférieur à 0 alors la fenetre perdu s'ouvre
             {
-                Console.WriteLine("chronos inferieur a 0");
-                Defaite fenêtreDefaite = new Defaite();
-                fenêtreDefaite.ShowDialog();
-                Constances.minuterie.Stop();
+                MessageBox.Show("Défaite !");
+                this.Close();
+
             }
             else if (nbNeiges >= Constances.NOMBREDENEIGE)             // si toute la neige est récupere alors la fenêtre gagner s'ouvre
             {
                 AfficheVictoire = true;
-                Console.WriteLine("Victoire atteinte !");
-                Victoires fenêtreVictoire = new Victoires();
-
+                MessageBox.Show("Victoire !");
+                this.Close();
+                
 
             }
         }
@@ -382,7 +381,7 @@ namespace Sae_Chasseneige
 
         private void StockNeige(object? sender, EventArgs e)
         {
-            Constances.neiges.Content = "Neiges " + nbNeiges;
+            Constances.neiges.Content = "Neiges " + nbNeiges;       // Affiche le nombre neige qui se reactualise 
             if (FenêtreDeDemarrage.modeChrono)
             {
                 Constances.neiges.Content = "Neiges " + nbNeiges + "/" + Constances.NOMBREDENEIGE; 

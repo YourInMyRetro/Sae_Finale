@@ -20,15 +20,16 @@ namespace Sae_Chasseneige
     public partial class MainWindow : Window
     {
         private MediaPlayer sonDeplacement; // gérer le son du déplacement
-        public static bool gauche, droite, haut, bas, collision, AfficheVictoire, AfficheDefaite;
-        public static double posX;
+        public static bool gauche, droite, haut, bas; // gérer les sens
+        public static bool collision, AfficheVictoire, AfficheDefaite; // bolléen pour vérifier les collision et 2 autres bolléen qui s'active en condition de victoire ou de defaite
+        public static double posX; 
         public static double posY;
         public static double augmentationX, augmentationY;
         public static double coefficientTaillefenêtreX, coefficientTaillefenêtreY;
-        public static int nbNeiges;
-        public static int vitesseChasseNeige;
-        public static int tempsChrono;
-        public static Label chronos = new Label();
+        public static int nbNeiges; // nombre de neige récupérer
+        public static int vitesseChasseNeige; // vitesse du Chasse Neige
+        public static int tempsChrono; // Temps de base du chrono qui s'active uniquement en modeChrono(mode Facile ou Difficile)
+        public static Label chronos = new Label(); // Chronomètre actuel qui est affiché
         public static MediaPlayer musique;// gérer la musique de fond
   
 
@@ -40,8 +41,8 @@ namespace Sae_Chasseneige
             //    if(Constances.MAP[y, x] == 4)
             if (fenêtreDémarrage.DialogResult == false)
             {
-                Application.Current.Shutdown();// ferme lppli
-                this.Close();
+                Application.Current.Shutdown();// ferme l'appli
+                this.Close(); // fermer la fenêtre
             }
             if (FenêtreDeDemarrage.lancementReglage == true)
             {
@@ -50,7 +51,7 @@ namespace Sae_Chasseneige
             }
             if (FenêtreDeDemarrage.modeChrono == true)
             {
-                EmplacementChrono();
+                EmplacementChrono(); // si mode facile ou difficile alors, afficher le chrono
             }
             Vitesse();
             EmplacementScoreNeige();
@@ -61,9 +62,9 @@ namespace Sae_Chasseneige
 
         private void Vitesse()
         {
-            if (FenêtreDeDemarrage.modeChrono == false)
+            if (FenêtreDeDemarrage.modeChrono == false) // si en mode farming, la vitesse est de 3
                 vitesseChasseNeige = 3;
-            else if (FenêtreDeDemarrage.modeChrono)
+            else if (FenêtreDeDemarrage.modeChrono) // si en mode facile ou difficile, la vitesse est de 6
                 vitesseChasseNeige = 6;
         }
 
@@ -89,24 +90,24 @@ namespace Sae_Chasseneige
         {
             Constances.chasseNeigeHaut = Constances.CHASSENEIGEHAUT;
             Constances.chasseNeigeBas = Constances.CHASSENEIGEBAS;
-            Constances.chasseNeigeGauche = Constances.CHASSENEIGEDROITE;
-            Constances.chasseNeigeDroite = Constances.CHASSENEIGEGAUCHE;
+            Constances.chasseNeigeGauche = Constances.CHASSENEIGEDROITE;    
+            Constances.chasseNeigeDroite = Constances.CHASSENEIGEGAUCHE;  // Image du chasse neige en fonction de ca position
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             coefficientTaillefenêtreX = this.ActualWidth / 800.0;
-            coefficientTaillefenêtreY = this.ActualHeight / 800.0;
+            coefficientTaillefenêtreY = this.ActualHeight / 800.0;  // dès que la fenêtre a finis de ce lancer
 
             ResetTimer();
-            NeigeSimulation(null, EventArgs.Empty);
-            ChasseNeigeParDefault();
+            NeigeSimulation(null, EventArgs.Empty);  // Pause la neige sur la map
+            ChasseNeigeParDefault(); 
         }
 
         private void ResetTimer()
         {
             if (FenêtreDeDemarrage.modeChrono == false)
             {
-               Constances.minuterie = new DispatcherTimer();
+                Constances.minuterie = new DispatcherTimer();                // Active le reset de la neige en mode farming (toute les 1 minute)
                 Constances.minuterie.Interval = TimeSpan.FromMinutes(1);
                 Constances.minuterie.Tick += NeigeSimulation;
                 Constances.minuterie.Start();
@@ -115,14 +116,14 @@ namespace Sae_Chasseneige
 
         private void NeigeSimulation(object? sender, EventArgs e)
         {
-            coefficientTaillefenêtreX = this.ActualWidth / 800.0;
+            coefficientTaillefenêtreX = this.ActualWidth / 800.0;           // calcul du coefficient d'agrandissement de la page 
             coefficientTaillefenêtreY = this.ActualHeight / 800.0;
 
             foreach (Rectangle element in Constances.TABLEAU_NEIGE)
             {
                 if (element != null)
                 {
-                    Canvas.Children.Remove(element);//retire lancienne neige
+                    Canvas.Children.Remove(element);//retire lancienne neige si il ya un element dans le tableau de la neige, elle est supprimé
                 }
             }
 
@@ -131,23 +132,23 @@ namespace Sae_Chasseneige
             {
                 for (int x = 0; x < Constances.MAP.GetLength(1); x++)
                 {
-                    if (Constances.MAP[y, x] == 1)
+                    if (Constances.MAP[y, x] == 1)          // regarde dans chaque élement du tableau MAP
                     {
-                        double tailleX = Constances.TAILLETUILE * coefficientTaillefenêtreX;
+                        double tailleX = Constances.TAILLETUILE * coefficientTaillefenêtreX;      // taille x et taille y des pixels      
                         double tailleY = Constances.TAILLETUILE * coefficientTaillefenêtreY;
 
                         Rectangle rect = new Rectangle
                         {
                             Width = tailleX,
                             Height = tailleY,
-                            Fill = Brushes.White, // met la texture blanche pour la neige
+                            Fill = Brushes.White, // simule de la neige en réalisant un carré blanc, en dessinant des carrés pour la neige de la tailles x et y calculé precedemment
 
                         };
 
-                        Canvas.SetLeft(rect, x * Constances.TAILLETUILE * coefficientTaillefenêtreX);
+                        Canvas.SetLeft(rect, x * Constances.TAILLETUILE * coefficientTaillefenêtreX);       // Positionne la neige
                         Canvas.SetTop(rect, y * Constances.TAILLETUILE * coefficientTaillefenêtreY);
-                        Constances.TABLEAU_NEIGE[x, y] = rect;
-                        Canvas.Children.Add(rect);
+                        Constances.TABLEAU_NEIGE[x, y] = rect; // met un rectangle dans tableau neige au position x et y 
+                        Canvas.Children.Add(rect); // ajoute le dessin du rectangle sur le Canvas
                     }
                 }
             }
@@ -156,26 +157,25 @@ namespace Sae_Chasseneige
         public void EmplacementScoreNeige()
         {
             Constances.neiges.Content = "nbNeige";
-            Constances.neiges.FontSize = 25;
-            Constances.neiges.Foreground = Brushes.Red;
+            Constances.neiges.FontSize = 25; // met le texte en gras
+            Constances.neiges.Foreground = Brushes.Red; // met de couleur rouge le texte de neige
 
-            // Canvas.SetLeft(neiges, 10*coefficientTaillefenêtreX); // Position horizontale
-            //Canvas.SetTop(neiges, 50*coefficientTaillefenêtreY);
-            Canvas.Children.Add(Constances.neiges);
+     
+            Canvas.Children.Add(Constances.neiges); // affiche le nombre de neige récolter
 
         }
 
         private void InitTimer()
         {
             Constances.minuterie = new DispatcherTimer();
-            Constances.minuterie.Interval = TimeSpan.FromMilliseconds(16);
-            Constances.minuterie.Tick += Deplacement;
+            Constances.minuterie.Interval = TimeSpan.FromMilliseconds(16); 
+            Constances.minuterie.Tick += Deplacement;                           // timer qui actualise les déplacement et le stock de neige
             Constances.minuterie.Tick += StockNeige;
             Constances.minuterie.Start();
             if (FenêtreDeDemarrage.modeChrono == true)
             {
                 Constances.minuterie = new DispatcherTimer();
-                Constances.minuterie.Interval = TimeSpan.FromSeconds(1);
+                Constances.minuterie.Interval = TimeSpan.FromSeconds(1);        // si lancement en mode Facile ou Diffile actualise le chronomètre et actualise la méthode Victoire
                 Constances.minuterie.Tick += Chronomètre;
                 Constances.minuterie.Tick += Victoire;
                 Constances.minuterie.Start();
@@ -185,39 +185,31 @@ namespace Sae_Chasseneige
 
         private void Victoire(object? sender, EventArgs e)
         {
-            if (tempsChrono < 0)
+            if (tempsChrono < 0)                                        // Si le temps du chrono est inférieur à 0 alors la fenetre perdu s'ouvre
             {
                 Console.WriteLine("chronos inferieur a 0");
                 Defaite fenêtreDefaite = new Defaite();
                 fenêtreDefaite.ShowDialog();
                 Constances.minuterie.Stop();
             }
-            else if (nbNeiges >= Constances.NOMBREDENEIGE)
+            else if (nbNeiges >= Constances.NOMBREDENEIGE)             // si toute la neige est récupere alors la fenêtre gagner s'ouvre
             {
                 AfficheVictoire = true;
                 Console.WriteLine("Victoire atteinte !");
                 Victoires fenêtreVictoire = new Victoires();
 
-                // Bloque l'exécution ici jusqu'à fermeture de la fenêtre.
-                bool? resultat = fenêtreVictoire.ShowDialog();
 
-                if (resultat == true)
-                {
-                    Console.WriteLine("L'utilisateur a cliqué sur Continuer !");
-                }
-
-                Constances.minuterie.Stop();
             }
         }
 
         private void Chronomètre(object? sender, EventArgs e)
         {
-            int minutes = tempsChrono / 60;
-            int seconde = tempsChrono % 60;
+            int minutes = tempsChrono / 60;                             
+            int seconde = tempsChrono % 60;             
 
             tempsChrono += -1;
-            chronos.Content = "Temps : " + minutes + " : " + seconde;
-            Canvas.SetLeft(chronos, 0 * coefficientTaillefenêtreX); // Position horizontale
+            chronos.Content = "Temps : " + minutes + " : " + seconde;   // le temps en minute
+            Canvas.SetLeft(chronos, 0 * coefficientTaillefenêtreX); // Position horizontale et verticale
             Canvas.SetTop(chronos, 20 * coefficientTaillefenêtreY);
 
         }
@@ -227,20 +219,20 @@ namespace Sae_Chasseneige
         {
             if (FenêtreDeDemarrage.nvDifficulté == "facile")
             {
-                tempsChrono = 60 * 5;
+                tempsChrono = 60 * 5;                               // augmente temps  du Chrono est augmenté a 5 minutes en mode facile
 
             }
             if (FenêtreDeDemarrage.nvDifficulté == "difficile")
-            {
-                tempsChrono = 60 * 3;
+            {   
+                tempsChrono = 60 * 3;                               //le temps est baissé car le mode est difficle 3 minutes en mode difficle
             }
 
             chronos.Content = "Temps : ";
             chronos.FontSize = 25;
-            chronos.Foreground = Brushes.Red;
+            chronos.Foreground = Brushes.Red;                         // couleur rouge pour le temps
 
 
-            Canvas.Children.Add(chronos);
+            Canvas.Children.Add(chronos);                               // Affiche le label du chrono sur le jeu
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -352,11 +344,7 @@ namespace Sae_Chasseneige
 
                 
             }
-            else
-            {
-                // Collision détectée, déplacement bloqué
-                Console.WriteLine("Collision détectée, déplacement bloqué.");
-            }
+        
         }
 
         private void ChasseNeigeParDefault()
@@ -394,7 +382,11 @@ namespace Sae_Chasseneige
 
         private void StockNeige(object? sender, EventArgs e)
         {
-            Constances.neiges.Content = "Neiges " + nbNeiges +"/"+ Constances.NOMBREDENEIGE;
+            Constances.neiges.Content = "Neiges " + nbNeiges;
+            if (FenêtreDeDemarrage.modeChrono)
+            {
+                Constances.neiges.Content = "Neiges " + nbNeiges + "/" + Constances.NOMBREDENEIGE; 
+            }             
 
         }
      
@@ -429,8 +421,8 @@ namespace Sae_Chasseneige
 
                         if (rect != null) // si contacte avec la neige le bruit se lance et en même temps la neige s'enlève
                         {
-                            Canvas.Children.Remove(rect);
-                            nbNeiges++;
+                            Canvas.Children.Remove(rect);           // la neige est enlevé de la map
+                            nbNeiges++; // enleve la neige supprimer donc la neige stocké augmente
                             MediaPlayer bruitNeige = new MediaPlayer();
                             bruitNeige.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/sons/neige.mp3"));
                             bruitNeige.Volume = 0.09;
@@ -455,7 +447,6 @@ namespace Sae_Chasseneige
                             return true;
 
                         }
-
                     }
                 }
 

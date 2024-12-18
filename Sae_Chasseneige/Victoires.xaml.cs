@@ -25,7 +25,8 @@ namespace Sae_Chasseneige
         }
         private void Continuer_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            Application.Current.Shutdown();// ferme lppli
+            this.Close();
         }
     }
 }

@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sae_Chasseneige"
         mc:Ignorable="d"
-        Title="Defaite" Height="450" Width="800">
-    <Grid>
-        
+        Title="Defaite" Height="450" Width="800"
+    ResizeMode="NoResize"
+     WindowStartupLocation="CenterScreen"
+     WindowState="Maximized"
+     WindowStyle="None">
+    <Window.Background>
+        <ImageBrush ImageSource="img/Perdu.png"/>
+    </Window.Background>
+    <Grid Margin="0,0,0,260">
+
+        <Button
+        x:Name="Continuer"
+        Canvas.Left="300"
+        Canvas.Top="150"
+        Width="200"
+        Height="50"
+        Background="Blue"
+        Content="CONTINUER"
+        FontSize="20"
+        Foreground="White" RenderTransformOrigin="0.503,1.875" Margin="297,332,0,-192" HorizontalAlignment="Left" Click="Continuer_Click" />
     </Grid>
 </Window>

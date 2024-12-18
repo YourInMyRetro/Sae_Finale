@@ -25,7 +25,7 @@ namespace Sae_Chasseneige
         public static readonly int LARGEURCHASSENEIGE = 5;
         public static readonly int LONGUEURCHASSENEIGE = 7;
         public static readonly Rectangle[,] TABLEAU_NEIGE = new Rectangle[50, 50];
-        public static readonly int NOMBREDENEIGE = 1131;
+        public static readonly int NOMBREDENEIGE = 1126;
 
         public static DispatcherTimer minuterie;
 

@@ -19,7 +19,7 @@ namespace Sae_Chasseneige
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MediaPlayer sonDeplacement; // Instance pour gérer le son de déplacement
+        private MediaPlayer sonDeplacement; // gérer le son du déplacement
         public static bool gauche, droite, haut, bas, collision, AfficheVictoire, AfficheDefaite;
         public static double posX;
         public static double posY;
@@ -29,18 +29,18 @@ namespace Sae_Chasseneige
         public static int vitesseChasseNeige;
         public static int tempsChrono;
         public static Label chronos = new Label();
-        public static MediaPlayer musique;
+        public static MediaPlayer musique;// gérer la musique de fond
   
 
         public MainWindow()
         {
             InitializeComponent();
-            FenêtreDeDemarrage fenêtreDémarrage = new FenêtreDeDemarrage();
-            fenêtreDémarrage.ShowDialog();
+            FenêtreDeDemarrage fenêtreDémarrage = new FenêtreDeDemarrage(); 
+            fenêtreDémarrage.ShowDialog(); // affiche la fenêtre du début 
             //    if(Constances.MAP[y, x] == 4)
             if (fenêtreDémarrage.DialogResult == false)
             {
-                Application.Current.Shutdown();
+                Application.Current.Shutdown();// ferme lppli
                 this.Close();
             }
             if (FenêtreDeDemarrage.lancementReglage == true)
@@ -122,7 +122,7 @@ namespace Sae_Chasseneige
             {
                 if (element != null)
                 {
-                    Canvas.Children.Remove(element);
+                    Canvas.Children.Remove(element);//retire lancienne neige
                 }
             }
 
@@ -140,7 +140,7 @@ namespace Sae_Chasseneige
                         {
                             Width = tailleX,
                             Height = tailleY,
-                            Fill = Brushes.White,
+                            Fill = Brushes.White, // met la texture blanche pour la neige
 
                         };
 
@@ -264,8 +264,8 @@ namespace Sae_Chasseneige
             }
             if (droite || gauche || haut || bas)
             {
-                // Jouer le son de déplacement
-                if (sonDeplacement == null) // Crée l'instance si elle n'existe pas
+                // joue le son de déplacement
+                if (sonDeplacement == null) // crée l'instance si elle n'existe pas
                 {
                     sonDeplacement = new MediaPlayer();
                     sonDeplacement.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/sons/v8.mp3"));
@@ -273,7 +273,7 @@ namespace Sae_Chasseneige
                     sonDeplacement.MediaEnded += RelanceMusique;// appel à la méthode relance pour pas que le son du v8 s'arrête après plusieurs secondes 
                 }
 
-                // Si le son n'est pas en train de jouer, lance-le
+                // si le son n'est pas en train de jouer, lance-le
                 if (sonDeplacement.Position == TimeSpan.Zero || sonDeplacement.HasAudio == false)
                 {
                     sonDeplacement.Play();
@@ -283,6 +283,7 @@ namespace Sae_Chasseneige
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
+            // arrete le déplacement 
             switch (e.Key)
             {
                 case Key.Right:
@@ -401,17 +402,18 @@ namespace Sae_Chasseneige
 
         private bool Collision(double posX, double posY)
         {
+            // calcul des dimensions (largeur et longueur) du chasse neige en fonction des coefficients d'échelle
             double largeurChasseNeige = (Constances.TAILLETUILE * Constances.LARGEURCHASSENEIGE - 64) * coefficientTaillefenêtreX;
             double longueurChasseNeige = (Constances.TAILLETUILE * Constances.LONGUEURCHASSENEIGE - 82) * coefficientTaillefenêtreY;
-
+            // Calcul de la hitbox du chasse neige
             double hitboxX = posX + (23 * coefficientTaillefenêtreX);
             double hitboxY = posY + (25 * coefficientTaillefenêtreY);
-
-            int debutX = Math.Clamp((int)(hitboxX / (Constances.TAILLETUILE * coefficientTaillefenêtreX)), 0, Constances.MAP.GetLength(1) - 1);
-            int debutY = Math.Clamp((int)(hitboxY / (Constances.TAILLETUILE * coefficientTaillefenêtreY)), 0, Constances.MAP.GetLength(0) - 1);
-            int finX = Math.Clamp((int)((hitboxX + largeurChasseNeige) / (Constances.TAILLETUILE * coefficientTaillefenêtreX)), 0, Constances.MAP.GetLength(1) - 1);
-            int finY = Math.Clamp((int)((hitboxY + longueurChasseNeige) / (Constances.TAILLETUILE * coefficientTaillefenêtreY)), 0, Constances.MAP.GetLength(0) - 1);
-
+            // Convertit la position de la hitbox en indices de la grille de la MAP
+            int debutX = Math.Clamp((int)(hitboxX / (Constances.TAILLETUILE * coefficientTaillefenêtreX)), 0, Constances.MAP.GetLength(1) - 1);// indice de la première tuile dans la matrice qui intersecte la hitbox.
+            int debutY = Math.Clamp((int)(hitboxY / (Constances.TAILLETUILE * coefficientTaillefenêtreY)), 0, Constances.MAP.GetLength(0) - 1); //indice de la première tuile dans la matrice qui intersecte la hitbox.
+            int finX = Math.Clamp((int)((hitboxX + largeurChasseNeige) / (Constances.TAILLETUILE * coefficientTaillefenêtreX)), 0, Constances.MAP.GetLength(1) - 1);//indice de la dernière tuile dans la matrice qui intersecte la hitbox.
+            int finY = Math.Clamp((int)((hitboxY + longueurChasseNeige) / (Constances.TAILLETUILE * coefficientTaillefenêtreY)), 0, Constances.MAP.GetLength(0) - 1);//indices de la dernière tuile dans la matrice qui intersecte la hitbox.
+            // parcourt toutes les cases de la grille dans la zone couverte par la hitbox
             for (int y = debutY; y <= finY; y++)
             {
                 for (int x = debutX; x <= finX; x++)
@@ -425,7 +427,7 @@ namespace Sae_Chasseneige
                     {
                         Rectangle rect = Constances.TABLEAU_NEIGE[x, y];
 
-                        if (rect != null)
+                        if (rect != null) // si contacte avec la neige le bruit se lance et en même temps la neige s'enlève
                         {
                             Canvas.Children.Remove(rect);
                             nbNeiges++;
@@ -435,7 +437,7 @@ namespace Sae_Chasseneige
                             bruitNeige.Play();
                         }
 
-                        Constances.TABLEAU_NEIGE[x, y] = null;
+                        Constances.TABLEAU_NEIGE[x, y] = null; //supprime le rectangle de neige de la grille
                     }
                     else if (Constances.MAP[y, x] == 4) // Garage
                     {
